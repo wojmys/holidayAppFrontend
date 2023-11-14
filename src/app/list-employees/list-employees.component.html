@@ -1,0 +1,25 @@
+<div class="alert alert-primary" role="alert">
+    <h1 class="user-list-top">Employees list:</h1>
+  </div>
+
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Total Holidays</th>
+        <th scope="col">Remaining Holidays</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of getEmployees()">
+        <th scope="row">{{employee.id}}</th>
+        <td>{{employee.name}}</td>
+        <td>{{employee.totalHolidays}}</td>
+        <td>{{employee.remainingHolidays}}</td>
+      </tr>
+    </tbody>
+  </table>
+

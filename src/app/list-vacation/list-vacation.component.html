@@ -1,0 +1,28 @@
+<div class="alert alert-primary" role="alert">
+    <h1 class="user-list-top">Vacations list:</h1>
+  </div>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Start date</th>
+        <th scope="col">End date</th>
+        <th scope="col">Quantity of days</th>
+        <th scope="col">Status</th>
+        <th scope="col">Employee</th>
+        <th scope="col">Substitution</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vacation of getVacations()">
+        <th scope="row">{{vacation.id}}</th>
+        <td>{{vacation.startDate}}</td>
+        <td>{{vacation.endDate}}</td>
+        <td>{{vacation.quantityDays}}</td>
+        <td>{{vacation.status}}</td>
+        <td>{{vacation.employee}}</td>
+        <td>{{vacation.substitution}}</td>
+      </tr>
+    </tbody>
+  </table>
