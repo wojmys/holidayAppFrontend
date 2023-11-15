@@ -96,15 +96,4 @@ export class CreateVacationComponent {
   }
 }
 
-/* ----------------------
-let startDate = this.checkoutForm.value.startDate!;
-let endDate = this.checkoutForm.value.endDate!;
 
-if (this.isValidDateFormat(startDate) && this.isValidDateFormat(endDate)) {
-  let start = new Date(Date.parse(startDate));
-  let end = new Date(Date.parse(endDate));
-
-  +this.checkoutForm.value.quantityDays = end-start;
-} else {
-  console.error('invalid input');
-} */

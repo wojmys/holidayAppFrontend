@@ -4,14 +4,25 @@
 <form class="row g-3" [formGroup]="checkoutForm" (ngSubmit)="onSave()">
     <div class="col-md-4">
       <label for="validationDefault01" class="form-label">From</label>
-      <input type="text" class="form-control" id="id=validationDefault01" placeholder="YYYY-MM-DD" formControlName="startDate" required (change)="onStartDateChanged()">
-      <div class="invalid-feedback">
+      <input type="text" 
+             class="form-control" 
+             id="id=validationDefault01" 
+             placeholder="YYYY-MM-DD" 
+             pattern="\d{4}-\d{2}-\d{2}" 
+             title="Please enter a date in the format YYYY-MM-DD"
+             formControlName="startDate" 
+             maxlength="10" 
+             required 
+             oninput="setCustomValidity('')" 
+             oninvalid="setCustomValidity('Please enter a valid date in the format YYYY-MM-DD')">
+      
+           <div class="invalid-feedback">
         Please provide a start date
       </div>
     </div>
     <div class="col-md-4">
       <label for="validationServer02" class="form-label">To</label>
-      <input type="text" class="form-control" id="validationServer02" placeholder="YYYY-MM-DD" formControlName="endDate" required (change)="onEndDateChanged()">
+      <input type="text" class="form-control" id="validationServer02" placeholder="YYYY-MM-DD" formControlName="endDate" maxlength="10" required (change)="onEndDateChanged()">
       <div class="invalid-feedback">
         Please provide an end date
       </div>
@@ -19,7 +30,7 @@
     <div class="col-md-4">
       <label for="validationServerUsername" class="form-label">Days: quantity</label>
       <div class="input-group has-validation">
-        <input type="text" class="form-control" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" formControlName="quantityDays" required>
+        <input type="text" class="form-control" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" formControlName="quantityDays"  required>
         <div id="validationServerUsernameFeedback" class="invalid-feedback">
         Please provide a quantity of days.
         </div>
