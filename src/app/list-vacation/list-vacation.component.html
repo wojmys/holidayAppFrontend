@@ -15,14 +15,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let vacation of getVacations()">
+      <tr *ngFor="let vacation of listOfVacations">
         <th scope="row">{{vacation.id}}</th>
         <td>{{vacation.startDate}}</td>
         <td>{{vacation.endDate}}</td>
         <td>{{vacation.quantityDays}}</td>
-        <td>{{vacation.status}}</td>
+        <td>{{vacation.status}}</td>  
         <td>{{vacation.employee}}</td>
         <td>{{vacation.substitution}}</td>
+   <!--      <td><span class="material-symbols-outlined" (click)="deleteVacation(vacation.id!)">delete</span></td> -->
+        <td><span class="material-symbols-outlined" (click)="confirmDeleteVacation(vacation.id!)">delete</span></td>
       </tr>
     </tbody>
   </table>

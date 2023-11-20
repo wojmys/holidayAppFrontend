@@ -1,28 +1,30 @@
 
 <h3>Create vacation</h3>
 
-<form class="row g-3" [formGroup]="checkoutForm" (ngSubmit)="onSave()">
+<form class="row g-3 needs-validation" novalidate [formGroup]="checkoutForm" (ngSubmit)="onSave()">
     <div class="col-md-4">
-      <label for="validationDefault01" class="form-label">From</label>
+      <label for="validationCustom01" class="form-label">From</label>
       <input type="text" 
              class="form-control" 
-             id="id=validationDefault01" 
+             id="validationCustom01" 
              placeholder="YYYY-MM-DD" 
              pattern="\d{4}-\d{2}-\d{2}" 
              title="Please enter a date in the format YYYY-MM-DD"
              formControlName="startDate" 
              maxlength="10" 
+             inputmode="numeric"
              required 
-             oninput="setCustomValidity('')" 
+             (input)="onEndDateChanged()"
+             oninput="setCustomValidity('XYZ')" 
              oninvalid="setCustomValidity('Please enter a valid date in the format YYYY-MM-DD')">
       
-           <div class="invalid-feedback">
+      <div class="valid-feedback">
         Please provide a start date
       </div>
     </div>
     <div class="col-md-4">
-      <label for="validationServer02" class="form-label">To</label>
-      <input type="text" class="form-control" id="validationServer02" placeholder="YYYY-MM-DD" formControlName="endDate" maxlength="10" required (change)="onEndDateChanged()">
+      <label for="vavalidationCustom02" class="form-label">To</label>
+      <input type="text" class="form-control" id="vavalidationCustom02" placeholder="YYYY-MM-DD" formControlName="endDate" maxlength="10" required (input)="onEndDateChanged()">
       <div class="invalid-feedback">
         Please provide an end date
       </div>
@@ -52,9 +54,11 @@
     </div>
     <div class="col-md-4">
         <label for="idEmployee" class="form-label">Employee</label>
-        <select class="form-select" id="idEmployee" aria-describedby="idEmployeeFeedback" formControlName="employee">
+       
+        <select class="form-select" id="idEmployee" aria-describedby="idEmployeeFeedback" formControlName="employee" required>
+          
           <option [ngValue]="null" disabled>Choose...</option>
-          <option *ngFor="let employee of listOfEmployees">{{employee.name}}</option>
+          <option *ngFor="let employee of listOfEmployees" value="{{employee.id}}">{{employee.name}}</option>
         </select>
         <div id="idEmployeeFeedback" class="invalid-feedback">
           Please choose an employee.
@@ -62,9 +66,9 @@
       </div>
       <div class="col-md-4">
         <label for="idSubstitution" class="form-label">Substitution</label>
-        <select class="form-select" id="idSubstitution" aria-describedby="idSubstitutionFeedback" formControlName="substitution">
+        <select class="form-select" id="idSubstitution" aria-describedby="idSubstitutionFeedback" formControlName="substitution" required>
           <option [ngValue]="null" disabled>Choose...</option>
-          <option *ngFor="let employee of listOfEmployees">{{ employee.name }}</option>
+          <option *ngFor="let employee of listOfEmployees" value="{{employee.id}}">{{ employee.name }}</option>
         </select>
         <div id="idSubstitutionFeedback" class="invalid-feedback">
           Please choose a substitution.
@@ -74,15 +78,15 @@
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
         <label class="form-check-label" for="invalidCheck3">
-            Entered data are corect
+            Entered data are correct
         </label>
         <div id="invalidCheck3Feedback" class="invalid-feedback">
-          Please check before submitting.
+          Please check the box before submitting.
         </div>
       </div>
     </div>
     <div class="col-3">
-      <button type="submit" class="btn btn-outline-primary">Save vacation</button>
+      <button class="btn btn-outline-primary" type="submit">Save vacation</button>
     </div>
   </form>
 

@@ -14,12 +14,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let employee of getEmployees()">
+      <tr *ngFor="let employee of listOfEmployees">
         <th scope="row">{{employee.id}}</th>
         <td>{{employee.name}}</td>
         <td>{{employee.totalHolidays}}</td>
         <td>{{employee.remainingHolidays}}</td>
+      <!--   <td><span class="material-symbols-outlined" >delete</span></td> -->
+        <td><span class="material-symbols-outlined" (click)="confirmDeleteEmployee(employee.id!)">delete</span></td>
+    <!--     <td><span class="material-symbols-outlined" (click)="deleteEmployee(employee.id!)">delete</span></td> -->
       </tr>
     </tbody>
-  </table>
+   </table>
 

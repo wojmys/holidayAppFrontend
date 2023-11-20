@@ -5,6 +5,7 @@ import { VacationDataService } from '../services/vacation-data.service';
 import { EmployeeDataService } from '../services/employee-data.service';
 import { StatusDataService } from '../services/status-data.service';
 import { Employee } from '../interfaces/employee';
+import { VacationDTO } from '../interfaces/vacation-dto';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class CreateVacationComponent {
     substitution:[null]
   });
 
-  listOfEmployees : Array<Employee>;
+  listOfEmployees : Array<Employee> = [];
   listOfStatus: Array<string>;
 
   constructor(
@@ -35,27 +36,37 @@ export class CreateVacationComponent {
     private employeeDataService: EmployeeDataService,
     private statusDataService: StatusDataService
     ) {
-      this.listOfEmployees = employeeDataService.getEmployees();
-
+      //this.listOfEmployees = employeeDataService.getEmployees();
+      employeeDataService.employees.subscribe(value =>{
+        
+        this.listOfEmployees = value;
+        console.log("CreateVacationComponent: ", value);
+        
+       } )
+      
       this.listOfStatus = statusDataService.getStatus();
     }
 
 
   onSave() {
-    console.info("On Save clicked");
-    console.info(this.checkoutForm.value)
-    this.dataservice.addVacation({
+    let vacation : VacationDTO = {
       startDate: this.checkoutForm.value.startDate!,
       endDate: this.checkoutForm.value.endDate!,
 /*       quantityDays: +this.checkoutForm.value.quantityDays!, */
       quantityDays: +this.calculateDuration(),
       status: this.checkoutForm.value.status!,
-      employee: this.checkoutForm.value.employee!,
-      substitution:this.checkoutForm.value.substitution!
-    })
-    
+      employeeId: this.checkoutForm.value.employee!,
+      substitutionId:this.checkoutForm.value.substitution!
+    }
+    console.log(vacation);
+    this.dataservice.addVacation(vacation).subscribe(
+      value => {
+        this.dataservice.refreshVacations();
+      }
+    );
   }
 
+  
   onStartDateChanged() {
     console.info("Date changed to " + this.checkoutForm.value.startDate!)
     // this.checkoutForm.value.quantityDays = this.checkoutForm.value.startDate!

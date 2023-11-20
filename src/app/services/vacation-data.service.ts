@@ -1,34 +1,64 @@
 import { Injectable } from '@angular/core';
 import { Vacation } from '../interfaces/vacation';
+import { Observable, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { VacationDTO } from '../interfaces/vacation-dto';
+import { Employee } from '../interfaces/employee';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VacationDataService {
+/* 
+  vacations : Vacation[]=  []; */
 
+  vacations : Subject<Vacation[]> = new Subject<Vacation[]>();
 
-  vacations : Array<Vacation>= [
-    // {
-    //   id: 5,
-    //   startDate: "13.11.2023",
-    //   endDate: "14.11.2023",
-    //   quantityDays: 2,
-    //   status: "In progress",
-    //   employee: "Joe Doe",
-    //   substitution: "Jane Doe"
-    // }
-  ];
+  url = 'http://localhost:8080/api'
 
+  constructor(private http: HttpClient) {
 
-  constructor() { }
+      this.refreshVacations();
+   }
 
-  addVacation(vacation: Vacation) {
-    this.vacations.push(vacation)
-    console.info(this.vacations)
+   addVacation(vacation: VacationDTO) : Observable<any> {
+    return this.http.post( this.url +'/booking', vacation)
   }
 
-  getVacations() : Array<Vacation> {
-    console.info(this.vacations);
-    return this.vacations;
+  refreshVacations() {
+    let newVacations : Vacation[] = [];
+
+    this.http.get<VacationDTO[]>(this.url +'/booking').subscribe(valueVacationDTOs => {
+      for (let vacationDto of valueVacationDTOs) {
+        this.http.get<Employee>(this.url + '/employee/' + vacationDto.employeeId).subscribe(
+          employee => {
+            this.http.get<Employee>(this.url + '/employee/' + vacationDto.substitutionId).subscribe(
+              substitution => 
+                {
+                  newVacations.push(
+                    {
+                      id: vacationDto.id,
+                      startDate: vacationDto.startDate,
+                      endDate: vacationDto.endDate,
+                      quantityDays: vacationDto.quantityDays,
+                      status: vacationDto.status,
+                      employee: employee.name,
+                      substitution: substitution.name
+                  
+                    }
+                  );
+                }
+              );
+          }
+        );
+      }
+        this.vacations.next(newVacations)
+      });
   }
+
+  getVacations() : Observable <Array<VacationDTO>> {
+     return this.http.get<VacationDTO[]>('http://localhost:8080/api/booking')
+   }
+
+ 
 }

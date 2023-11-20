@@ -6,7 +6,10 @@ import { Injectable } from '@angular/core';
 })
 export class StatusDataService {
 
-  statusList:  Array <string> = ['in progress', 'approved', 'declined'];
+  statusList:  Array <string> = [   'APPROVED',
+    'REJECTED',
+    'IN_PROGRESS'
+  ];
 
   constructor() { }
 
