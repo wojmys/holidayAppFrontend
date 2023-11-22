@@ -1,0 +1,16 @@
+<h3>Edit employee</h3>
+
+<form [formGroup]="checkoutForm" (ngSubmit)="onSave()">
+<div class="mb-3">
+    <label for="username" class="form-label">Employee</label>
+    <input type="username" class="form-control" id="username" placeholder="name" formControlName="username">
+  </div>
+
+  <div class="mb-3">
+    <label for="totalHolidays" class="form-label">Total Vacations</label>
+    <input type="totalvacations" class="form-control" id="totalHolidays" placeholder="Days: quantity" formControlName="totalHolidays">
+  </div>
+
+  <button type="submit" class="btn btn-outline-primary">Save employee</button>
+  
+</form>

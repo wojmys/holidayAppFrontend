@@ -30,6 +30,7 @@ export class ListVacationComponent {
       .subscribe(() => {
         this.dataservice.refreshVacations();
       });
+      console.log('delete id='+vacationId)
   }
 
   confirmDeleteVacation(vacationId: Number): void {
@@ -38,15 +39,5 @@ export class ListVacationComponent {
     if (isConfirmed) {
       this.deleteVacation(vacationId);
     }
-
-
   }
-
-  /*    deleteEmployee(employeeId: Number) {
-        this.http
-          .delete('http://localhost:8080/api/employee/' + employeeId)
-          .subscribe(() => {
-            this.dataservice.refreshEmployees();
-          });
-      } */
 }

@@ -11,7 +11,7 @@ import { Employee } from '../interfaces/employee';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './create-employee.component.html',
-  styleUrl: './create-employee.component.scss'
+  styleUrl: './create-employee.component.scss',
 })
 export class CreateEmployeeComponent {
 

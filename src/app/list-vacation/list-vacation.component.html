@@ -25,6 +25,7 @@
         <td>{{vacation.substitution}}</td>
    <!--      <td><span class="material-symbols-outlined" (click)="deleteVacation(vacation.id!)">delete</span></td> -->
         <td><span class="material-symbols-outlined" (click)="confirmDeleteVacation(vacation.id!)">delete</span></td>
+        <td><a class="dropdown-item" href="vacations/edit/{{vacation.id}}"> <span class="material-symbols-outlined">edit</span></a></td>
       </tr>
     </tbody>
   </table>

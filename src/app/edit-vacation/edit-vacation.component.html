@@ -1,5 +1,5 @@
 
-<h3>Create vacation</h3>
+<h3>Edit vacation</h3>
 
 <form class="row g-3 needs-validation" novalidate [formGroup]="checkoutForm" (ngSubmit)="onSave()">
     <div class="col-md-4">
@@ -42,9 +42,8 @@
       <label for="idStatus" class="form-label">Status</label>
       <select class="form-select" id="idStatus" aria-describedby="idStatusFeedback" formControlName="status" required>
        <!--  <option selected disabled value="">Choose...</option> -->
-       <option [ngValue]="null" disabled>Choose...</option>
-       <option *ngFor="let status of listOfStatuses">{{status}}</option>
-    
+        <option [ngValue]="null" disabled>Choose...</option>
+        <option *ngFor="let status of listOfStatuses">{{status}}</option>
       </select>
       <div id="idStatusFeedback" class="invalid-feedback">
         Please select correct status.

@@ -23,12 +23,12 @@ export class CreateVacationComponent {
     endDate: '',
     quantityDays:'',
     status:[null],
-    employee:[null],
-    substitution:[null]
+    employee: -1,
+    substitution: -1
   });
 
   listOfEmployees : Array<Employee> = [];
-  listOfStatus: Array<string>;
+  listOfStatuses: Array<string>=[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,10 +43,16 @@ export class CreateVacationComponent {
         console.log("CreateVacationComponent: ", value);
         
        } )
+       employeeDataService.refreshEmployees();
+       
       
-      this.listOfStatus = statusDataService.getStatus();
+      statusDataService.statusesList.subscribe(value=>{
+        this.listOfStatuses=value;
+        console.log("StatusList: ", value);
+      })
+      statusDataService.refreshStatuses();
+  
     }
-
 
   onSave() {
     let vacation : VacationDTO = {

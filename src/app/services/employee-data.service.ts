@@ -16,23 +16,35 @@ export class EmployeeDataService {
   }
 
   addEmployee(employee: Employee) : Observable<any> {
-   /*  this.employees.push(employee) */
-   console.info(this.employees)
-   return this.http.post('http://localhost:8080/api/employee', employee)
-  }
-
+    /*  this.employees.push(employee) */
+    console.info(this.employees)
+    return this.http.post('http://localhost:8080/api/employee', employee)
+   }
  
+   updateEmployee(employee: Employee) : Observable<any> {
+    /*  this.employees.push(employee) */
+    console.info(this.employees)
+    return this.http.put('http://localhost:8080/api/employee/' + employee.id!, employee)
+   }
+ 
+   
  /*  deleteEmployee(employeeId: number) {
    this.http.delete('http://localhost:8080/api/employee/'+employeeId)
   } */
 
   getEmployees() : Observable<Array<Employee>> {
-   // console.info(this.employees);
-    return this.http.get<Employee[]>('http://localhost:8080/api/employee')
-    //return this.employees;
-  }
-
-  refreshEmployees() {
+    // console.info(this.employees);
+     return this.http.get<Employee[]>('http://localhost:8080/api/employee')
+     //return this.employees;
+   }
+ 
+   getEmployee(id: Number) : Observable<Employee> {
+    // console.info(this.employees);
+     return this.http.get<Employee>('http://localhost:8080/api/employee/' + id)
+     //return this.employees;
+   }
+ 
+    refreshEmployees() {
     this.http.get<Employee[]>('http://localhost:8080/api/employee').subscribe(value => {
      // console.log("refreshEmployees - next: ", value);
       this.employees.next(value)

@@ -11,6 +11,8 @@
         <th scope="col">Name</th>
         <th scope="col">Total Holidays</th>
         <th scope="col">Remaining Holidays</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -22,7 +24,8 @@
       <!--   <td><span class="material-symbols-outlined" >delete</span></td> -->
         <td><span class="material-symbols-outlined" (click)="confirmDeleteEmployee(employee.id!)">delete</span></td>
     <!--     <td><span class="material-symbols-outlined" (click)="deleteEmployee(employee.id!)">delete</span></td> -->
-      </tr>
+        <td><a class="dropdown-item" href="employees/edit/{{employee.id}}"> <span class="material-symbols-outlined">edit</span></a></td>
+  </tr>
     </tbody>
    </table>
-
+  
