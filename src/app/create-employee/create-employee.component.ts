@@ -23,7 +23,7 @@ export class CreateEmployeeComponent {
   constructor(
     private formBuilder: FormBuilder,
     private dataservice: EmployeeDataService,
-    private employeeDataService: EmployeeDataService,) {
+    private employeeDataService: EmployeeDataService) {
     //  this.employeeDataService.getEmployees().subscribe(value => this.listOfEmployees = value)
     }
   
@@ -44,22 +44,7 @@ export class CreateEmployeeComponent {
       }
       
     );
-    // this.myEventEmitter.emit(employee)
- 
-
-
-    // this.doStep1();
-    // this.doStep2();
-    // this.doStep3();
-
-    // this.doStep1().subscribe(
-    //   this.doStep2().subscribe(
-    //     this.doStep3().subscribe(
-
-    //     )
-    //   )
-    // )
-
+   
 
   }
     

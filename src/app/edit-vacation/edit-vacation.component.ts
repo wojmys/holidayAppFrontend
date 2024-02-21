@@ -8,6 +8,7 @@ import { StatusDataService } from '../services/status-data.service';
 import { VacationDataService } from '../services/vacation-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Vacation } from '../interfaces/vacation';
+import { Status } from '../interfaces/status';
 
 @Component({
   selector: 'app-edit-vacation',
@@ -21,13 +22,13 @@ export class EditVacationComponent {
     startDate: '',
     endDate: '',
     quantityDays: '',
-    status: '',
+    status: -1,
     employee: -1,
     substitution: -1,
   });
 
   listOfEmployees: Array<Employee> = [];
-  listOfStatuses: Array<string>=[];
+  listOfStatuses: Array<Status>=[];
   currentVacation: VacationDTO | undefined ;
 
   constructor(
@@ -42,9 +43,13 @@ export class EditVacationComponent {
       this.listOfEmployees = value;
       console.log('CreateVacationComponent: ', value);
     });
+    statusDataService.statusesList.subscribe(value=>{
+      this.listOfStatuses=value;
+    });
     const routeParams = this.route.snapshot.paramMap;
     const vacationId = Number(routeParams.get('id'));
     employeeDataService.refreshEmployees();
+    statusDataService.refreshStatuses();
 
     dataservice.getVacation(vacationId).subscribe(vacation =>{
       this.currentVacation=vacation;
@@ -52,17 +57,13 @@ export class EditVacationComponent {
             startDate: vacation.startDate!,
             endDate: vacation.endDate!,
             quantityDays:vacation.quantityDays+'',
-            status: vacation.status+'',
+            status: +vacation.statusId,
             employee: +vacation.employeeId,
             substitution: +vacation.substitutionId
     
           })
     });
 
-    statusDataService.statusesList.subscribe(value=>{
-      this.listOfStatuses=value;
-    });
-    statusDataService.refreshStatuses();
     
   }
 
@@ -73,7 +74,7 @@ export class EditVacationComponent {
       endDate: this.checkoutForm.value.endDate!,
       /*       quantityDays: +this.checkoutForm.value.quantityDays!, */
       quantityDays: +this.calculateDuration(),
-      status: this.checkoutForm.value.status!,
+      statusId: this.checkoutForm.value.status!,
       employeeId: +this.checkoutForm.value.employee!,
       substitutionId: +this.checkoutForm.value.substitution!,
     };

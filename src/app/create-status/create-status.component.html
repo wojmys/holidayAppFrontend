@@ -1,0 +1,13 @@
+<h3>Create status</h3>
+
+<form [formGroup]="checkoutForm" (ngSubmit)="onSave()">
+<div class="mb-3">
+    <label for="status name" class="form-label">Status</label>
+    <input type="username" class="form-control" id="name" placeholder="name" formControlName="name">
+  </div>
+
+ 
+
+  <button type="submit" class="btn btn-outline-primary">Save status</button>
+  
+</form>

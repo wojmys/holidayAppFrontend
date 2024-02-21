@@ -42,8 +42,8 @@
       <label for="idStatus" class="form-label">Status</label>
       <select class="form-select" id="idStatus" aria-describedby="idStatusFeedback" formControlName="status" required>
        <!--  <option selected disabled value="">Choose...</option> -->
-       <option [ngValue]="null" disabled>Choose...</option>
-       <option *ngFor="let status of listOfStatuses">{{status}}</option>
+       <option [ngValue]="-1" disabled>Choose...</option>
+       <option *ngFor="let status of listOfStatuses" value="{{status.id}}">{{status.name}}</option>
     
       </select>
       <div id="idStatusFeedback" class="invalid-feedback">

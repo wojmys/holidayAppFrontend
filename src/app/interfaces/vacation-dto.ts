@@ -4,7 +4,7 @@ export interface VacationDTO {
     startDate: string;
     endDate: string;
     quantityDays: Number;
-    status: string;
+    statusId: Number;
     employeeId: Number;
     substitutionId: Number;
 }

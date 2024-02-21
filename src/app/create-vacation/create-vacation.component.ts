@@ -6,6 +6,7 @@ import { EmployeeDataService } from '../services/employee-data.service';
 import { StatusDataService } from '../services/status-data.service';
 import { Employee } from '../interfaces/employee';
 import { VacationDTO } from '../interfaces/vacation-dto';
+import { Status } from '../interfaces/status';
 
 
 @Component({
@@ -22,13 +23,13 @@ export class CreateVacationComponent {
     startDate: '',
     endDate: '',
     quantityDays:'',
-    status:[null],
+    status:-1,
     employee: -1,
     substitution: -1
   });
 
   listOfEmployees : Array<Employee> = [];
-  listOfStatuses: Array<string>=[];
+  listOfStatuses: Array<Status>=[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,7 +61,7 @@ export class CreateVacationComponent {
       endDate: this.checkoutForm.value.endDate!,
 /*       quantityDays: +this.checkoutForm.value.quantityDays!, */
       quantityDays: +this.calculateDuration(),
-      status: this.checkoutForm.value.status!,
+      statusId: this.checkoutForm.value.status!,
       employeeId: this.checkoutForm.value.employee!,
       substitutionId:this.checkoutForm.value.substitution!
     }

@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { Status } from '../interfaces/status';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatusDataService {
-  [x: string]: any;
+  
 
-  statusesList : Subject<string[]> = new Subject<string[]>();
+  statusesList : Subject<Status[]> = new Subject<Status[]>();
 
 /*   statusList:  Array <string> = [   'APPROVED',
     'REJECTED',
@@ -20,14 +21,31 @@ export class StatusDataService {
     this.refreshStatuses()
   }
 
-  getStatuses(): Observable<Array<string>> {
+  getStatuses(): Observable<Array<Status>> {
    
-    return this.http.get<string[]>('http://localhost:8080/api/status');
+    return this.http.get<Status[]>('http://localhost:8080/api/status')
     
   }
+  getStatus(id: Number) : Observable<Status> {
+   
+     return this.http.get<Status>('http://localhost:8080/api/status/' + id)
+   
+   }
+
+  addStatus(status: Status) : Observable<any> {
+   
+    console.info(this.statusesList)
+    return this.http.post('http://localhost:8080/api/status', status)
+   }
+ 
+   updateStatus(status: Status) : Observable<any> {
+   
+    console.info(this.statusesList)
+    return this.http.put('http://localhost:8080/api/status/' + status.id!, status)
+   }
  
   refreshStatuses() {
-    this.http.get<string[]>('http://localhost:8080/api/status').subscribe(value => {
+    this.http.get<Status[]>('http://localhost:8080/api/status').subscribe(value => {
     
       this.statusesList.next(value)
     });

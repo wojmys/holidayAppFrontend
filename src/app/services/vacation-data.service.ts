@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { VacationDTO } from '../interfaces/vacation-dto';
 import { Employee } from '../interfaces/employee';
+import { Status } from '../interfaces/status';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,7 @@ export class VacationDataService {
   }
 
   addVacation(vacation: VacationDTO): Observable<any> {
+    console.log('Vacation created ', vacation)
     return this.http.post(this.url + '/booking', vacation);
   }
 
@@ -31,23 +33,27 @@ export class VacationDataService {
       .get<VacationDTO[]>(this.url + '/booking')
       .subscribe((valueVacationDTOs) => {
         for (let vacationDto of valueVacationDTOs) {
+         // this.http.get<Status>(this.url+'/status/'+vacationDto.status)
+
           this.http
             .get<Employee>(this.url + '/employee/' + vacationDto.employeeId)
             .subscribe((employee) => {
-              this.http
-                .get<Employee>(
-                  this.url + '/employee/' + vacationDto.substitutionId
-                )
+              this.http.get<Employee>(this.url + '/employee/' + vacationDto.substitutionId)
                 .subscribe((substitution) => {
+
+                  this.http.get<Status>(this.url+'/status/'+vacationDto.statusId)
+                  .subscribe((status) => {
+                    
                   newVacations.push({
                     id: vacationDto.id,
                     startDate: vacationDto.startDate,
                     endDate: vacationDto.endDate,
                     quantityDays: vacationDto.quantityDays,
-                    status: vacationDto.status,
+                    status: status.name,
                     employee: employee.name,
                     substitution: substitution.name,
                   });
+                });
                 });
             });
         }
